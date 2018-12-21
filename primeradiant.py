@@ -1,6 +1,6 @@
 from textblob import TextBlob
 
-def metrics(text):
+def scan(text):
     blob = TextBlob(text)
     results = {
         "pol": blob.sentiment.polarity,
