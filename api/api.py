@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 @app.route('/scan', methods=['POST'])
 def scan():
-    text = request.form.get('text')
+    url = request.form.get('url')
+    text = pr.url_to_text(url)
     result = pr.scan(text)
     return json.dumps(result)
 

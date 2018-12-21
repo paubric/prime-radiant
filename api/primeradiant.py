@@ -14,6 +14,7 @@ def scan(text):
 def url_to_text(url):
     r = requests.get(url)
     html = r.text
+
     soup = BeautifulSoup(html, 'lxml')
 
     text = []
@@ -21,4 +22,5 @@ def url_to_text(url):
         text.append(tag.text)
         tag.next_sibling
 
-    return text[0]
+    text = ''.join(text)
+    return text
