@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup
 def scan(text):
     blob = TextBlob(text)
     results = {
-        "pol": blob.sentiment.polarity,
-        "sub": blob.sentiment.subjectivity
+        "pol": round(blob.sentiment.polarity, 3),
+        "sub": round(blob.sentiment.subjectivity, 3)
     }
 
     return results
