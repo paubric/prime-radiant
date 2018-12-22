@@ -4,17 +4,21 @@ document.addEventListener('DOMContentLoaded', function() {
   checkPageButton.addEventListener('click', function() {
 
     chrome.tabs.getSelected(null, function(tab) {
-      d = document;
+      var url = 'http://127.0.0.1:5000/scan';
+      var data = {url:tab.url};
 
-      var f = d.createElement('form');
-      f.action = 'http://127.0.0.1:5000/scan';
-      f.method = 'post';
-      var i = d.createElement('input');
-      i.type = 'hidden';
-      i.name = 'url';
-      i.value = tab.url;
-      f.appendChild(i);
-      d.body.appendChild(f);
+      fetch(url, {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .then(response => {
+          alert(JSON.stringify(response));
+          resultsLabel.textContent = 'Subjectivity: ' + response['sub'];
+        })
+      .catch(error => alert('Error:', error));
 
     });
   }, false);
